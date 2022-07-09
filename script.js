@@ -26,3 +26,22 @@ function operate(operandA, operandB, operation) {
             return divide(operandA, operandB);
     }
 }
+
+function clear() {
+    screen.textContent = "0";
+}
+
+function inputMath() {
+    if (screen.textContent == "0") {
+        screen.textContent = this.textContent;
+    }
+    else {
+        screen.textContent += this.textContent;
+    }
+}
+
+const screen = document.querySelector("#screen span");
+const buttons = document.querySelectorAll(".printable");
+buttons.forEach(button => button.addEventListener("click", inputMath))
+const clearButton = document.querySelector("#clr");
+clearButton.addEventListener("click", clear);

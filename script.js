@@ -31,9 +31,19 @@ function clear() {
     screen.textContent = "0";
 }
 
+const mathSymbols = ["+", "-", "÷", "×"];
+
 function inputMath() {
-    if (screen.textContent == "0") {
-        screen.textContent = this.textContent;
+    const content = screen.textContent;
+    if (content == "0") {
+        if (!mathSymbols.find(symbol => symbol == this.textContent)) {
+            screen.textContent = this.textContent;
+        }
+    }
+    else if (mathSymbols.find(symbol => symbol == content.slice(content.length - 1)) &&
+        mathSymbols.find(symbol => symbol == this.textContent)) {
+        screen.textContent = content.slice(0, content.length -1)
+        + this.textContent;
     }
     else {
         screen.textContent += this.textContent;

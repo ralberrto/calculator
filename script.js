@@ -16,13 +16,13 @@ function divide(dividend, divisor) {
 
 function operate(operandA, operandB, operation) {
     switch (operation) {
-        case "mult":
+        case "×":
             return multiply(operandA, operandB);
-        case "sum":
+        case "+":
             return add(operandA, operandB);
-        case "subt":
+        case "-":
             return subtract(operandA, operandB);
-        case "div":
+        case "÷":
             return divide(operandA, operandB);
     }
 }

@@ -33,8 +33,11 @@ function clear() {
 
 function deleteLast() {
     const content = screen.textContent;
-    if (content != "0") {
+    if (content.length != 1) {
         screen.textContent = content.slice(0, content.length - 1);
+    }
+    else {
+        screen.textContent = "0";
     }
 }
 

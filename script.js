@@ -31,6 +31,13 @@ function clear() {
     screen.textContent = "0";
 }
 
+function deleteLast() {
+    const content = screen.textContent;
+    if (content != "0") {
+        screen.textContent = content.slice(0, content.length - 1);
+    }
+}
+
 const mathSymbols = ["+", "-", "÷", "×"];
 
 function isOperator(symbol) {
@@ -99,3 +106,5 @@ const buttons = document.querySelectorAll(".printable");
 buttons.forEach(button => button.addEventListener("click", inputMath))
 const clearButton = document.querySelector("#clr");
 clearButton.addEventListener("click", clear);
+const delButton = document.querySelector("#del");
+delButton.addEventListener("click", deleteLast);

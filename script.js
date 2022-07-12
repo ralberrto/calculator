@@ -37,23 +37,60 @@ function isOperator(symbol) {
     return mathSymbols.some(operator => symbol == operator);
 }
 
+function findLastOperator(array) {
+    let index = array.reverse().findIndex(symbol => isOperator(symbol));
+    const lastIndex = array.length - 1;
+    !(index + 1) ? index = lastIndex : null;
+    return lastIndex - index;
+}
+
+function allowPoint(array) {
+    return Boolean(!array.find(symbol => symbol == "."))
+}
+
+function stripOperator(string) {
+    return mathSymbols.find(symbol => symbol == string[0]) ? string.slice(1) : string;
+}
+
+function extractLastNumber(string) {
+    const lastOperator = findLastOperator(string.split(""));
+    return stripOperator(string.slice(lastOperator));
+}
+
 function inputMath() {
     const content = screen.textContent;
+    const lastInput = content.slice(content.length - 1);
+    const input = this.textContent;
+    const lastNumber = extractLastNumber(content).split("");
     if (content == "0") {
-        if ("." == this.textContent) {
-            screen.textContent += this.textContent;
+        if (input == "." || isOperator(input)) {
+            screen.textContent = "0" + input;
         }
-        else if (!isOperator(this.textContent)) {
-            screen.textContent = this.textContent;
+        else if (!(input == 0)) {
+            screen.textContent = input;
         }
     }
-    else if (isOperator(content.slice(content.length - 1)) &&
-        isOperator(this.textContent)) {
-        screen.textContent = content.slice(0, content.length -1)
-        + this.textContent;
+    else if (isOperator(lastInput)) {
+        if (input == ".") {
+            screen.textContent += "0."
+        }
+        else if (isOperator(input)) {
+            screen.textContent = content.slice(0, content.length - 1) + input;
+        }
+        else {
+            screen.textContent += input;
+        }
     }
-    else {
-        screen.textContent += this.textContent;
+    else  {
+        if (!allowPoint(lastNumber) && input == ".") {
+            null;
+        }
+        else if (lastNumber == "0" && input  != ".") {
+            screen.textContent = content.slice(0, content.length - 1) + "0";
+        }
+        else {
+            screen.textContent += input;
+        }
     }
 }
 
